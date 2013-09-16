@@ -1,0 +1,38 @@
+
+==================================================
+mapper.py -v -l 0:$((237*4)):237  -p 'orthographic' /home/brock/vtk_dev/test_files/ucov.nc ucov
+There is a problem with isofill : 2 isofills are filled with the same color
+Not when
+mapper.py -v -l 0:$((238*4)):238  -p 'orthographic' /home/brock/vtk_dev/test_files/ucov.nc ucov
+
+==================================================
+Isocontours and Isofill are not matched well
+Referenced by me as
+Bug #: 727 (http://public.kitware.com/Bug/bug.php?op=show&bugid=727)
+
+==================================================
+When Qt interface is used (-x option), 
+keyboard hits are detected in uppercase 
+
+It concerns class vtk.qt.QVTKRenderWindowInteractor
+
+Has found the bug. Need to be reported and corrected.
+
+Edit /VTK-4.4_DIRECTORY/Wrapping/Python/vtk/qt/QVTKRenderWindowInteractor.py
+Line 283 add
+        if ev.key() < 256:
+                key=str(ev.text())
+
+==================================================
+When Qt interface is used (-x option),
+and when user exits by pressing key "e", 
+you get the following message: 
+
+"Fatal Python error: PyEval_RestoreThread: NULL tstate"
+
+==================================================
+
+problem with call with 0 for min and max in levels
+mapper.py -l 0:0:4   -v -p orthographic -x ~/prod/2L27_SE_2030_2039_output/2L27_SE_2030_2039_histmth.nc tsol
+
+==================================================

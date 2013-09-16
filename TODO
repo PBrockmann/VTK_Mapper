@@ -1,0 +1,58 @@
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Patrick Brockmann - 01/12/2005
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#-------------------------------------------------
+- irreguar levels, scalarbar with irregular levels
+
+#-------------------------------------------------
+- Read colors from XML files created from ColorChoose application
+
+#-------------------------------------------------
+- Add controls on positions and texts for labels:
+    * %u for username
+    * %f for filenames
+    * %d for date 
+    * ...
+To load from a XML file (?)
+
+#-------------------------------------------------
+- Add option to control set of plot positions
+ren1xstart, ren1xend, ren1ystart, ren1yend
+To load from a XML file (?)
+
+#-------------------------------------------------
+- Add option to control size of image if not by default
+
+#-------------------------------------------------
+- In tab 'Files' when interface is launched, 
+    * load new file selected and display same variable if present, 
+      if not present load first variable
+    * transform the local file browser to a remote file browser 
+
+#-------------------------------------------------
+- In tab 'Levels', add control of specific levels
+    * limitation with scalarbar designed for regular levels 
+    * be able to save levels and load levels from a XML file
+      (see specifications on coding levels/colors in ColorChoose application)
+
+#-------------------------------------------------
+- In tab 'Operations', add evaluation of expression with use of COCO/CDMS
+    * COCO is not compatible with generic grids for now
+
+#-------------------------------------------------
+- Improve plot of axis in linear projection 
+    * small undesirable spaces
+
+#-------------------------------------------------
+- Develop a mouse levels control to let the user clicks on a map
+to add or remove the level corresponding to the value clicked
+
+#-------------------------------------------------
+- Add a tab to load continents file; describe structure of 
+the netCDF file and how to generate new ones from USGS server  
+http://crusty.er.usgs.gov/coast/getcoast.html
+
+#-------------------------------------------------

@@ -1,0 +1,84 @@
+######################################################
+Usage:  mapper.py [-h]
+        [-p projection] [-a actor]
+        [-n levels_nb] [-l min:max:delta]
+        [--bg r,g,b] [--fg r,g,b]
+        [--camera camera_object_file] [--color spectrum_color_file]
+        [--kindex index] [--lindex index]
+        [--continents] [--continents_file file] [--continents_color r,g,b] [--continents_width width]
+        [--boundaries] [--boundaries_color r,g,b] [--boundaries_width width]
+        [--equator] [--equator_color r,g,b] [--equator_width width]
+        [--grid] [--grid_color r,g,b] [--grid_width width] [--grid_delta delta]
+        [--verbose] [--prefix prefixfilename] [--offscreen] [-x] [--interface]
+        [--gridfile gridCF_file]
+        var_file var
+######################################################
+Options:
+        -h, -?, --help, -help
+                Print this manual
+        -x, --interface
+                Run the application with the GUI interface
+        -p, --projection
+                Projection to choose in (linear,orthographic)
+        -a, --actor
+                Actor to choose in :
+                        isofill,cell,cellbounds,isoline1,isoline2
+                Other accepted syntax are:
+                        isofilled,cells,,cellsbounds,isolines1,isolines2
+        -v, --verbose
+                Verbose mode
+        -n, --levels_nb
+                Number of levels should be in [3:100] 
+        -l, --levels
+                Levels expressed as minimum:maximum:delta
+                Example: -l 2:32:4 from 2 to 32 by step of 4
+                         -l 0:0:4 from min to max by step of 4
+        --bg, --background
+                Background color expressed as red, green, blue values in [0:1]
+                Example: --bg 0.3,0.3,0.3
+        --fg, --foreground
+                Foreground color expressed as red, green, blue values in [0:1]
+                Example: --fg 1.0,1.0,1.0
+        --op, --operation
+                Operation to apply on variable (use quote)
+                Example: --op 'var*86400'
+                         --op '(var*100)+273.15'
+        --camera
+                Camera object file
+        --color
+                Spectrum color file
+                This file follows the coding of the ferret percent method which
+                defines points along an abstract path in RGB color space that runs
+                from 0 to 100 percent. Search Palette/by_percent in
+                http://ferret.wrc.noaa.gov/Ferret/Documentation
+        --kindex
+                Index for the 3th dimension (vertical axis)
+                of the variable to plot [1:n]
+        --lindex
+                Index for the 4th dimension (time axis)
+                of the variable to plot [1:n]
+        --boundaries, --continents, --equator, --grid
+                Drawn if this option is present
+        --boundaries_color, --continents_color, --equator_color, --grid_color
+                Color expressed as red, green, blue values in [0:1]
+                Example: --boundaries_color 0.,0.,0.3
+        --boundaries_width, --continents_width, --equator_width, --grid_width
+                Lines width expressed in [1:5]
+        --continents_file
+                NetCDF continents file (CONT_LON,CONT_LAT variables)
+        --grid_delta
+                Delta for grid lines (default=30)
+        --prefix
+                Filename prefix used when PNG and PDF file
+                are saved (default=picture)
+        --gridfile
+                NetCDF file at the CF convention from where the mesh is read.
+                If present, the "mask" variable is read and used in combinaison
+                with the mask deduced from the variable.
+                If gridfile not present, use only self descriptions of the variable.
+        --ratioxy
+                Set the ratio between height and width
+                for linear projection (default=1.0)
+        --offscreen
+                Produce a PNG and a PDF file in a offscreen mode
+

@@ -1,0 +1,41 @@
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Patrick Brockmann - 14/03/2006
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+----------------------------------
+Example files can be found at:
+http://dods.ipsl.jussieu.fr/prism/gridsCF 
+
+Use syntax: http://dods.ipsl.jussieu.fr/cgi-bin/nph-dods/dir1/dir2/file.nc
+
+----------------------------------
+mapper.py -v -p orthographic -x 2L27_SE_2030_2039_histmth.nc tsol
+
+----------------------------------
+mapper.py -v -p orthographic -x sampleCurveGrid4.nc sample
+
+----------------------------------
+mapper.py -v -p orthographic -x http://dods.ipsl.jussieu.fr/cgi-bin/nph-dods/prism/gridsCF/sampleCurveGrid4.nc sample
+
+----------------------------------
+mapper.py -l 100:2500:100 -v -p orthographic -x sampleGenGrid3.nc sample
+ 
+----------------------------------
+mapper.py -v --color color1.sty 2L27_SE_2030_2039_histmth.nc precip
+
+----------------------------------
+mapper.py -v --levels -2:18:1 --lindex 9 --color color3.sty --gridfile IPSL.ORCA2_gridCF.nc --projection orthographic 2L27_SE_2030_2039_grid_T.nc votemper
+
+----------------------------------
+mapper.py -v --levels -2:18:1 --lindex 9 --color color3.sty --gridfile http://dods.ipsl.jussieu.fr/cgi-bin/nph-dods/prism/gridsCF/IPSL.ORCA2_gridCF.nc --projection orthographic http://dods.ipsl.jussieu.fr/cgi-bin/nph-dods/fast/atlas/2L27_SE_2030_2039_output/2L27_SE_2030_2039_grid_T.nc votemper
+
+----------------------------------
+mapper.py -x --actor isofill --camera camera4.sty --color color4.sty --continents --continents_color 0.0,0.0,1.0 --continents_file ./polydouble_earth_continents.nc --continents_width 2 --equator --equator_color 0.0,0.0,0.0 --equator_width 2 --grid --grid_color 0.45,0.45,0.45 --grid_delta 10 --grid_width 1 --levels_nb 15 --operation 'var-273.15' 2L27_SE_2030_2039_histmth.nc t2m
+
+----------------------------------
+mapper.py -v --offscreen -l 100:1000:50 --equator continents 2L27_SE_2030_2039_histmth.nc rhum
+
+----------------------------------
+
