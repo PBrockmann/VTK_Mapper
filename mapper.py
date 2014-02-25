@@ -1,6 +1,4 @@
-#!/opt/VTK-6.1.0/bin/vtkpython
 #!/usr/bin/env python
-#
 
 license = """
 Copyright Patrick Brockmann (CEA / LSCE) 
