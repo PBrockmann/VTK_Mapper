@@ -1023,8 +1023,7 @@ polydata2=vtk.vtkAppendPolyData()
 def polydata_transform(projection):
 	polydata2.AddInputData(polydata)
 	if projection ==  'linear' : 
-		transformer.Update()
-		polydata2.AddInputData(transformer.GetOutput())
+		polydata2.AddInputConnection(transformer.GetOutputPort())
 
 polydata_transform(option_projection)
 
@@ -1702,7 +1701,7 @@ def Keypress(obj, event):
 		varindextextkindex=varindextextkindexformat%(kindex+1,kindex_max+1) 
 		varindextextlindex=varindextextlindexformat%(lindex+1,lindex_max+1) 
 		varindextext='k= '+ varindextextkindex+' l= '+ varindextextlindex
-		varindextextactor.SetInputData(varindextext)
+		varindextextactor.SetInput(varindextext)
 		if kindex == 0 :
 			del command['--kindex']
 		else :
@@ -1726,7 +1725,7 @@ def Keypress(obj, event):
 		varindextextkindex=varindextextkindexformat%(kindex+1,kindex_max+1) 
 		varindextextlindex=varindextextlindexformat%(lindex+1,lindex_max+1) 
 		varindextext='k= '+ varindextextkindex+' l= '+ varindextextlindex
-		varindextextactor.SetInputConnection(varindextext)
+		varindextextactor.SetInput(varindextext)
 		command['--kindex']=str(kindex+1)
     #----------------------------
     if key == "!" or key == "+" :
