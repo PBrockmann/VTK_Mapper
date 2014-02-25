@@ -43,7 +43,7 @@ def CreateViewportBox(colorfg,linewidth=3) :
 	coords.SetCoordinateSystemToNormalizedViewport()
 
 	boxmapper = vtk.vtkPolyDataMapper2D()
-	boxmapper.SetInput(box)
+	boxmapper.SetInputData(box)
 	boxmapper.SetTransformCoordinate(coords)
 
 	boxactor = vtk.vtkActor2D()
@@ -71,7 +71,7 @@ def CreateAxisTickActor(xstart,ystart,xend,yend,colorfg) :
 	coords = vtk.vtkCoordinate()
 	coords.SetCoordinateSystemToNormalizedViewport()
 	linemapper = vtk.vtkPolyDataMapper2D()
-	linemapper.SetInput(line.GetOutput())
+	linemapper.SetInputConnection(line.GetOutputPort())
 	linemapper.SetTransformCoordinate(coords)
 	tick = vtk.vtkActor2D()
 	tick.SetMapper(linemapper)
@@ -104,8 +104,8 @@ def CreateLonAxisTicks(axisxticknb,textprop) :
 		xpostext=xpostextformat%xpos
 		listlonaxistextactors.append(CreateTextActor(xpostext,textprop,0,0,
 					justification=0,verticaljustification=1))
-		listlonaxistickdactors.append(CreateAxisTickActor(0,0,0,axisxticksize,colorfg))
 		listlonaxistickuactors.append(CreateAxisTickActor(0,0,0,axisxticksize,colorfg))
+		listlonaxistickdactors.append(CreateAxisTickActor(0,0,0,axisxticksize,colorfg))
 		listlonaxispos.append(xpos)
 		listlonaxisvisibility.append(1)
 

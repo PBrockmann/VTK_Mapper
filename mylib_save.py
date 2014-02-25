@@ -35,7 +35,7 @@ def SavePNG():
 	filepng=option_prefix+'_%03d.png' %png_number 
 	my_print(option_verbose,'Start writing PNG file', filepng)
 	pngw = vtk.vtkPNGWriter() 
-	pngw.SetInput(w2i.GetOutput()) 
+	pngw.SetInputConnection(w2i.GetOutputPort()) 
 	pngw.SetFileName(filepng) 
 	pngw.Write()
 
@@ -86,10 +86,10 @@ def SavePoly():
 
 	polywriter=vtk.vtkPolyDataWriter()
 	polywriter.SetFileName('out_poly.vtk')
-	#polywriter.SetInput(__main__.boundariespolydata.GetOutput())
-	#polywriter.SetInput(__main__.polydata2.GetOutput())
-	polywriter.SetInput(__main__.clean.GetOutput())
-	#polywriter.SetInput(__main__.continentspolydata.GetOutput())
+	#polywriter.SetInputConnection(__main__.boundariespolydata.GetOutputPort())
+	#polywriter.SetInputConnection(__main__.polydata2.GetOutputPort())
+	polywriter.SetInputConnection(__main__.clean.GetOutputPort())
+	#polywriter.SetInputConnection(__main__.continentspolydata.GetOutputPort())
 	polywriter.Write()
 
 ##################################

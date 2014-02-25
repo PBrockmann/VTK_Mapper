@@ -1,3 +1,4 @@
+#!/opt/VTK-6.1.0/bin/vtkpython
 #!/usr/bin/env python
 #
 
@@ -1015,14 +1016,15 @@ transform=vtk.vtkTransform()
 transform.Translate(360,0,0)
 
 transformer=vtk.vtkTransformPolyDataFilter()
-transformer.SetInput(polydata)
+transformer.SetInputData(polydata)
 transformer.SetTransform(transform)
 
 polydata2=vtk.vtkAppendPolyData()
 def polydata_transform(projection):
-	polydata2.AddInput(polydata)
+	polydata2.AddInputData(polydata)
 	if projection ==  'linear' : 
-		polydata2.AddInput(transformer.GetOutput())
+		transformer.Update()
+		polydata2.AddInputData(transformer.GetOutput())
 
 polydata_transform(option_projection)
 
@@ -1088,7 +1090,7 @@ define_lut1(color_filename,levels_nb-1)
 #********************************
 # Clean 
 clean = vtk.vtkCleanPolyData()
-clean.SetInput(polydata2.GetOutput())
+clean.SetInputConnection(polydata2.GetOutputPort())
 clean.Update()
 
 my_print(option_verbose,'----------------------------')
@@ -1099,13 +1101,13 @@ my_print(option_verbose,'Nb of points: ', clean.GetOutput().GetNumberOfPoints())
 #********************************
 # Cells To Points
 cell2point = vtk.vtkCellDataToPointData()
-cell2point.SetInput(clean.GetOutput())
+cell2point.SetInputConnection(clean.GetOutputPort())
 cell2point.Update()
 
 #********************************
 # Cell 
 cellmapper = vtk.vtkPolyDataMapper()
-cellmapper.SetInput(clean.GetOutput())
+cellmapper.SetInputConnection(clean.GetOutputPort())
 cellmapper.SetScalarRange(levels_range)
 cellmapper.SetLookupTable(lut1)
 
@@ -1119,7 +1121,7 @@ cellactor.GetProperty().SetDiffuse(0)
 #********************************
 # Cell bounds
 cellboundsmapper = vtk.vtkPolyDataMapper()
-cellboundsmapper.SetInput(clean.GetOutput())
+cellboundsmapper.SetInputConnection(clean.GetOutputPort())
 cellboundsmapper.ScalarVisibilityOff()
 cellboundsmapper.SetResolveCoincidentTopologyToPolygonOffset()
 
@@ -1137,7 +1139,7 @@ cellboundsactor.PickableOff()
 #********************************
 # Isofill 
 isofill = vtk.vtkBandedPolyDataContourFilter()
-isofill.SetInput(cell2point.GetOutput())
+isofill.SetInputConnection(cell2point.GetOutputPort())
 isofill.SetScalarModeToValue()
 isofill.GenerateContourEdgesOn()
 def isofill_del() :
@@ -1148,7 +1150,7 @@ def isofill_create() :
 isofill_create() 
 
 isofillmapper = vtk.vtkPolyDataMapper()
-isofillmapper.SetInput(isofill.GetOutput())
+isofillmapper.SetInputConnection(isofill.GetOutputPort())
 isofillmapper.SetResolveCoincidentTopologyToPolygonOffset()
 isofillmapper.SetLookupTable(lut1)
 isofillmapper.SetScalarRange(levels_range)
@@ -1166,7 +1168,7 @@ isofillactor.PickableOff()
 #********************************
 # Isoline
 isoline = vtk.vtkContourFilter()
-isoline.SetInput(cell2point.GetOutput())
+isoline.SetInputConnection(cell2point.GetOutputPort())
 def isoline_del() :
 	isoline.SetNumberOfContours(0)
 def isoline_create() :
@@ -1177,7 +1179,7 @@ isoline_create()
 #--------
 # Isolines in color 
 isoline1mapper = vtk.vtkPolyDataMapper()
-isoline1mapper.SetInput(isoline.GetOutput())
+isoline1mapper.SetInputConnection(isoline.GetOutputPort())
 isoline1mapper.SetLookupTable(lut1)
 isoline1mapper.SetScalarRange(levels_range)
 
@@ -1193,7 +1195,7 @@ isoline1actor.PickableOff()
 #--------
 # Isolines in black 
 isoline2mapper = vtk.vtkPolyDataMapper()
-isoline2mapper.SetInput(isoline.GetOutput())
+isoline2mapper.SetInputConnection(isoline.GetOutputPort())
 isoline2mapper.ScalarVisibilityOff()
 
 #isoline2actor = vtk.vtkLODActor()
@@ -1221,6 +1223,7 @@ scalarbar.SetMaximumNumberOfColors(30)
 scalarbar.SetLookupTable(lut1)
 scalarbar.SetLabelTextProperty(textprop)
 scalarbar.SetTitleTextProperty(textprop)
+scalarbar.SetTitle("")			# http://paraview.org/Bug/view.php?id=14561
 #scalarbar.GetLookupTable().SetTableRange(levels_range)
 scalarbar.GetLabelTextProperty().SetJustificationToCentered()
 
@@ -1699,7 +1702,7 @@ def Keypress(obj, event):
 		varindextextkindex=varindextextkindexformat%(kindex+1,kindex_max+1) 
 		varindextextlindex=varindextextlindexformat%(lindex+1,lindex_max+1) 
 		varindextext='k= '+ varindextextkindex+' l= '+ varindextextlindex
-		varindextextactor.SetInput(varindextext)
+		varindextextactor.SetInputData(varindextext)
 		if kindex == 0 :
 			del command['--kindex']
 		else :
@@ -1723,7 +1726,7 @@ def Keypress(obj, event):
 		varindextextkindex=varindextextkindexformat%(kindex+1,kindex_max+1) 
 		varindextextlindex=varindextextlindexformat%(lindex+1,lindex_max+1) 
 		varindextext='k= '+ varindextextkindex+' l= '+ varindextextlindex
-		varindextextactor.SetInput(varindextext)
+		varindextextactor.SetInputConnection(varindextext)
 		command['--kindex']=str(kindex+1)
     #----------------------------
     if key == "!" or key == "+" :
@@ -1795,7 +1798,7 @@ textpickactor.GetCaptionTextProperty().ShadowOff()
 textpickactor.GetCaptionTextProperty().ItalicOn()
 textpickactor.GetCaptionTextProperty().SetFontFamily(textprop.GetFontFamily())
 textpickactor.BorderOff()
-textpickactor.SetLeaderGlyph(coneglyph.GetOutput())
+textpickactor.SetLeaderGlyphData(coneglyph.GetOutput())
 textpickactor.SetMaximumLeaderGlyphSize(8)
 textpickactor.SetLeaderGlyphSize(0.025)
 textpickactor.ThreeDimensionalLeaderOn()

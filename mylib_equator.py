@@ -45,7 +45,7 @@ def equator_create(
 	equatorpolydata.SetLines(polygonlines)
 
 	equatorpolygonmapper=vtk.vtkDataSetMapper()
-	equatorpolygonmapper.SetInput(equatorpolydata)
+	equatorpolygonmapper.SetInputData(equatorpolydata)
 
 	equatorpolygonactor=vtk.vtkActor()
 	equatorpolygonactor.SetMapper(equatorpolygonmapper)

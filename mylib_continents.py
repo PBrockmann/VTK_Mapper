@@ -65,14 +65,14 @@ def continents_create(
 				polydata=vtk.vtkPolyData()
 				polydata.SetPoints(polygonpoints)
 				polydata.SetLines(polygonlines)
-				continentspolydata.AddInput(polydata)
+				continentspolydata.AddInputData(polydata)
 
 			n_polypoints=0
 
 	f.close()
 
 	continentspolygonmapper=vtk.vtkDataSetMapper()
-	continentspolygonmapper.SetInput(continentspolydata.GetOutput())
+	continentspolygonmapper.SetInputConnection(continentspolydata.GetOutputPort())
 
 	continentspolygonactor=vtk.vtkActor()
 	continentspolygonactor.SetMapper(continentspolygonmapper)

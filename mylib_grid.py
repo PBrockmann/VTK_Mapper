@@ -90,21 +90,21 @@ def grid_create(
 	gridpolydata=vtk.vtkAppendPolyData()
 	for i in range(0,int(90*arg_ratioxy),int(arg_grid_delta*arg_ratioxy)) :
 		latpolydata=latitude_create(i,arg_projection)
-		gridpolydata.AddInput(latpolydata)
+		gridpolydata.AddInputData(latpolydata)
 	for i in range(0,int(-90*arg_ratioxy),int(-arg_grid_delta*arg_ratioxy)) :
 		latpolydata=latitude_create(i,arg_projection)
-		gridpolydata.AddInput(latpolydata)
+		gridpolydata.AddInputData(latpolydata)
 	if arg_projection == 'linear' :
 		for i in range(-180,540,arg_grid_delta) :
 			lonpolydata=longitude_create(i,arg_projection,arg_ratioxy)
-			gridpolydata.AddInput(lonpolydata)
+			gridpolydata.AddInputData(lonpolydata)
 	else:
 		for i in range(0,180,arg_grid_delta) :
 			lonpolydata=longitude_create(i,arg_projection)
-			gridpolydata.AddInput(lonpolydata)
+			gridpolydata.AddInputData(lonpolydata)
 
 	gridpolygonmapper=vtk.vtkDataSetMapper()
-	gridpolygonmapper.SetInput(gridpolydata.GetOutput())
+	gridpolygonmapper.SetInputConnection(gridpolydata.GetOutputPort())
 
 	gridpolygonactor=vtk.vtkActor()
 	gridpolygonactor.SetMapper(gridpolygonmapper)
