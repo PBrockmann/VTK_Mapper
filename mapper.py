@@ -1887,25 +1887,24 @@ def AnnotatePick(obj, event):
         #my_print(option_verbose,'Pick outside')
         textpickactor.VisibilityOff()
     else:
-        #my_print(option_verbose,'Pick inside', cellid)
+        my_print(option_verbose,'Pick inside', cellid)
         posx, posy, posz = picker.GetPickPosition()
-        #my_print(option_verbose,'Pick position', posx, posy, posz)
+        my_print(option_verbose,'Pick position', posx, posy, posz)
         if option_projection == 'linear':
             text = 'Indice I = ' + str(index_i_1[cellid]) + '\n' \
                 + 'Value = ' + '%.3f' % var_1[cellid] + '\n' \
                 + 'Longitude = ' + '%.3f' % posx + '\n' \
                 + 'Latitude = ' + '%.3f' % posy
-            # + 'Indice J = ' + str(index_j_1[cellid]) + '\n' \
         else:
             text = 'Indice I = ' + str(index_i_1[cellid]) + '\n' \
                 + 'Value = ' + '%.3f' % var_1[cellid]
-            # + 'Indice J = ' + str(index_j_1[cellid]) + '\n' \
 
+        my_print(option_verbose, text)
         textpickactor.SetCaption(text)
         textpickactor.SetAttachmentPoint(posx, posy, posz)
-        textpickactor.VisibilityOn()
+        #textpickactor.VisibilityOn()
     renwin.Render()
-
+    print(text)
 
 picker = vtk.vtkCellPicker()
 picker.AddObserver('EndPickEvent', AnnotatePick)
