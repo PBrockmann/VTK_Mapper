@@ -9,33 +9,35 @@
 # Modification:
 #
 
-import vtk 
+import vtk
 
-def CreateTextActor(text,textprop,xpos,ypos,
-			justification="left",
-			verticaljustification="bottom") :	
+##################################
+def CreateTextActor(text, textprop, xpos, ypos,
+                    justification="left", fontsize=12,
+                    verticaljustification="bottom"):
 
-	textactor = vtk.vtkTextActor()
+    textactor = vtk.vtkTextActor()
 
-	textactor.SetInput(text)
-	textactor.GetPositionCoordinate().SetCoordinateSystemToNormalizedViewport()
-	textactor.SetPosition(xpos,ypos)
+    textactor.SetInput(text)
+    textactor.GetPositionCoordinate().SetCoordinateSystemToNormalizedViewport()
+    textactor.SetPosition(xpos, ypos)
 
-	textactor.GetTextProperty().SetFontFamily(textprop.GetFontFamily())
-	textactor.GetTextProperty().SetColor(textprop.GetColor())
+    textactor.GetTextProperty().SetFontFamily(textprop.GetFontFamily())
+    textactor.GetTextProperty().SetColor(textprop.GetColor())
+    textactor.GetTextProperty().SetFontSize(fontsize)
 
-	if justification in (-1,"left") :
-		textactor.GetTextProperty().SetJustificationToLeft()
-	elif justification in (0,"center","middle") :
-		textactor.GetTextProperty().SetJustificationToCentered()
-	elif justification in (1,"right") :
-		textactor.GetTextProperty().SetJustificationToRight()
+    if justification in (-1, "left"):
+        textactor.GetTextProperty().SetJustificationToLeft()
+    elif justification in (0, "center", "middle"):
+        textactor.GetTextProperty().SetJustificationToCentered()
+    elif justification in (1, "right"):
+        textactor.GetTextProperty().SetJustificationToRight()
 
-	if verticaljustification in (-1,"bottom") :
-		textactor.GetTextProperty().SetVerticalJustificationToBottom()
-	elif verticaljustification in (0,"center","middle") :
-		textactor.GetTextProperty().SetVerticalJustificationToCentered()
-	elif verticaljustification in (1,"top") :
-		textactor.GetTextProperty().SetVerticalJustificationToTop()
+    if verticaljustification in (-1, "bottom"):
+        textactor.GetTextProperty().SetVerticalJustificationToBottom()
+    elif verticaljustification in (0, "center", "middle"):
+        textactor.GetTextProperty().SetVerticalJustificationToCentered()
+    elif verticaljustification in (1, "top"):
+        textactor.GetTextProperty().SetVerticalJustificationToTop()
 
-	return textactor
+    return textactor
