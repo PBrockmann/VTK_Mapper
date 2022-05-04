@@ -4,12 +4,9 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mapper.py --color colors/ncl_01.spk -l -10:40:5 https://vesg.ipsl.upmc.fr/thredds/dodsC/IPSLFS/brocksce/VTK_Mapper/temp.nc TEMP
-mapper.py -v -p orthographic https://vesg.ipsl.upmc.fr/thredds/dodsC/IPSLFS/brocksce/VTK_Mapper/sampleCurveGrid4.nc sample
-mapper.py -v -p orthographic https://vesg.ipsl.upmc.fr/thredds/dodsC/IPSLFS/brocksce/VTK_Mapper/sampleGenGrid3.nc sample
-mapper.py -v --label_format '%5.0f' -l -3000:1500:500 -p orthographic https://vesg.ipsl.upmc.fr/thredds/dodsC/IPSLFS/brocksce/VTK_Mapper/phis.nc phis
-
-
-
+mapper.py -v -p orthographic https://thredds-su.ipsl.fr/thredds/dodsC/ipsl_thredds/brocksce/VTK_Mapper/sampleCurveGrid4.nc sample
+mapper.py -v -p orthographic https://thredds-su.ipsl.fr/thredds/dodsC/ipsl_thredds/brocksce/VTK_Mapper/sampleGenGrid3.nc sample
+mapper.py -v --label_format '%5.0f' -l -3000:1500:500 -p orthographic https://thredds-su.ipsl.fr/thredds/dodsC/ipsl_thredds/brocksce/VTK_Mapper/phis.nc phis
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Patrick Brockmann - 14/03/2006
